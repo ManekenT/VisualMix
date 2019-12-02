@@ -1,6 +1,7 @@
 package visualMix.visualizer;
 
 import processing.core.PApplet;
+import visualMix.midiInterface.MidiListener;
 
 public class VisualizerApplet extends PApplet {
 
@@ -8,6 +9,7 @@ public class VisualizerApplet extends PApplet {
 
 	public VisualizerApplet(Visualizer visualizer) {
 		_visualizer = visualizer;
+		MidiListener.getInstance().addClockListener(_visualizer);
 	}
 
 	public void settings() {

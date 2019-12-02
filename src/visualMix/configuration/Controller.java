@@ -9,8 +9,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import processing.core.PApplet;
 import themidibus.MidiBus;
-import visualMix.midiInterface.MidiCCListener;
-import visualMix.midiInterface.MidiController;
+import visualMix.midiInterface.ControllerValues;
+import visualMix.midiInterface.MidiClockListener;
+import visualMix.midiInterface.MidiListener;
+import visualMix.midiInterface.MidiValueListener;
 import visualMix.visualizer.TestVisualizer;
 import visualMix.visualizer.Visualizer;
 import visualMix.visualizer.VisualizerApplet;
@@ -34,12 +36,6 @@ public class Controller {
 
 	@FXML
 	private ComboBox<Integer> eqLowACC;
-
-	@FXML
-	private ComboBox<Integer> beatPhaseAChannel;
-
-	@FXML
-	private ComboBox<Integer> beatPhaseACC;
 
 	@FXML
 	private ComboBox<Integer> faderLevelAChannel;
@@ -66,12 +62,6 @@ public class Controller {
 	private ComboBox<Integer> eqLowBCC;
 
 	@FXML
-	private ComboBox<Integer> beatPhaseBChannel;
-
-	@FXML
-	private ComboBox<Integer> beatPhaseBCC;
-
-	@FXML
 	private ComboBox<Integer> faderLevelBChannel;
 
 	@FXML
@@ -95,7 +85,8 @@ public class Controller {
 	@FXML
 	private Label ccDebug;
 
-	private MidiConfig _midiconfig = MidiConfig.getInstance();
+	@FXML
+	private Label clockDebug;
 
 	public void initialize() {
 		initMidiDebugListener();
@@ -104,7 +95,6 @@ public class Controller {
 		visualizerComboBox.getSelectionModel().select(0);
 
 		midiDevicesComboBox.setItems(getAvailableMidiDevices());
-
 		midiDevicesComboBox.setOnAction(a -> onMidiDeviceChanged());
 
 		initializeChannelComboBox(eqHighAChannel);
@@ -113,8 +103,6 @@ public class Controller {
 		initializeCCComboBox(eqMidACC);
 		initializeChannelComboBox(eqLowAChannel);
 		initializeCCComboBox(eqLowACC);
-		initializeChannelComboBox(beatPhaseAChannel);
-		initializeCCComboBox(beatPhaseACC);
 		initializeChannelComboBox(faderLevelAChannel);
 		initializeCCComboBox(faderLevelACC);
 		initializeChannelComboBox(eqHighBChannel);
@@ -123,16 +111,41 @@ public class Controller {
 		initializeCCComboBox(eqMidBCC);
 		initializeChannelComboBox(eqLowBChannel);
 		initializeCCComboBox(eqLowBCC);
-		initializeChannelComboBox(beatPhaseBChannel);
-		initializeCCComboBox(beatPhaseBCC);
 		initializeChannelComboBox(faderLevelBChannel);
 		initializeCCComboBox(faderLevelBCC);
 		initializeChannelComboBox(crossfaderChannel);
 		initializeCCComboBox(crossfaderCC);
 
 		crossfaderChannel.setOnAction(
-				e -> _midiconfig.setCrossfaderChannel(crossfaderChannel.getSelectionModel().getSelectedItem()));
-		crossfaderCC.setOnAction(e -> _midiconfig.setCrossfaderCC(crossfaderCC.getSelectionModel().getSelectedItem()));
+				e -> ControllerValues.CROSSFADER.setChannel(crossfaderChannel.getSelectionModel().getSelectedItem()));
+		crossfaderCC.setOnAction(
+				e -> ControllerValues.CROSSFADER.setCC(crossfaderCC.getSelectionModel().getSelectedItem()));
+		eqHighAChannel.setOnAction(
+				e -> ControllerValues.EQ_HIGH_A.setChannel(eqHighAChannel.getSelectionModel().getSelectedItem()));
+		eqHighACC.setOnAction(e -> ControllerValues.EQ_HIGH_A.setCC(eqHighACC.getSelectionModel().getSelectedItem()));
+		eqHighBChannel.setOnAction(
+				e -> ControllerValues.EQ_HIGH_B.setChannel(eqHighBChannel.getSelectionModel().getSelectedItem()));
+		eqHighBCC.setOnAction(e -> ControllerValues.EQ_HIGH_B.setCC(eqHighBCC.getSelectionModel().getSelectedItem()));
+		eqMidAChannel.setOnAction(
+				e -> ControllerValues.EQ_MID_A.setChannel(eqMidAChannel.getSelectionModel().getSelectedItem()));
+		eqMidACC.setOnAction(e -> ControllerValues.EQ_MID_A.setCC(eqMidACC.getSelectionModel().getSelectedItem()));
+		eqMidBChannel.setOnAction(
+				e -> ControllerValues.EQ_MID_B.setChannel(eqMidBChannel.getSelectionModel().getSelectedItem()));
+		eqMidBCC.setOnAction(e -> ControllerValues.EQ_MID_B.setCC(eqMidBCC.getSelectionModel().getSelectedItem()));
+		eqLowAChannel.setOnAction(
+				e -> ControllerValues.EQ_LOW_A.setChannel(eqLowAChannel.getSelectionModel().getSelectedItem()));
+		eqLowACC.setOnAction(e -> ControllerValues.EQ_LOW_A.setCC(eqLowACC.getSelectionModel().getSelectedItem()));
+		eqLowBChannel.setOnAction(
+				e -> ControllerValues.EQ_LOW_B.setChannel(eqLowBChannel.getSelectionModel().getSelectedItem()));
+		eqLowBCC.setOnAction(e -> ControllerValues.EQ_LOW_B.setCC(eqLowBCC.getSelectionModel().getSelectedItem()));
+		faderLevelAChannel.setOnAction(e -> ControllerValues.FADER_LEVEL_A
+				.setChannel(faderLevelAChannel.getSelectionModel().getSelectedItem()));
+		faderLevelACC.setOnAction(
+				e -> ControllerValues.FADER_LEVEL_A.setCC(faderLevelACC.getSelectionModel().getSelectedItem()));
+		faderLevelBChannel.setOnAction(e -> ControllerValues.FADER_LEVEL_B
+				.setChannel(faderLevelBChannel.getSelectionModel().getSelectedItem()));
+		faderLevelBCC.setOnAction(
+				e -> ControllerValues.FADER_LEVEL_B.setCC(faderLevelBCC.getSelectionModel().getSelectedItem()));
 	}
 
 	private void initializeChannelComboBox(ComboBox<Integer> comboBox) {
@@ -171,10 +184,10 @@ public class Controller {
 	}
 
 	private void initMidiDebugListener() {
-		MidiController.getInstance().addCCListener(new MidiCCListener() {
+		MidiListener.getInstance().addValueListener(new MidiValueListener() {
 
 			@Override
-			public void onCC(int channel, int number, int value) {
+			public void onValueChange(int channel, int number, int value) {
 				StringBuilder builder = new StringBuilder();
 				builder.append("Channel: ");
 				builder.append(channel);
@@ -187,10 +200,29 @@ public class Controller {
 				Platform.runLater(() -> ccDebug.setText(builder.toString()));
 			}
 		});
+
+		MidiListener.getInstance().addClockListener(new MidiClockListener() {
+			private int _totalTicks;
+
+			@Override
+			public void onClockTick() {
+				_totalTicks++;
+				if (_totalTicks % 48 == 0) {
+					Platform.runLater(() -> clockDebug.setText("BEAT"));
+				} else {
+					Platform.runLater(() -> clockDebug.setText("----"));
+				}
+			}
+
+			@Override
+			public void onClockRestart() {
+				_totalTicks = 0;
+			}
+		});
 	}
 
 	private void onMidiDeviceChanged() {
-		_midiconfig.setMidiDevice(midiDevicesComboBox.getSelectionModel().getSelectedItem());
+		MidiListener.getInstance().setMidiDevice(midiDevicesComboBox.getSelectionModel().getSelectedItem());
 	}
 
 }

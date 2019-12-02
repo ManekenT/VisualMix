@@ -6,6 +6,7 @@ module visualMix {
 	requires javafx.fxml;
 	requires javafx.base;
 	requires java.desktop;
+	requires java.persistence;
 
 	opens visualMix.configuration to javafx.fxml;
 	opens visualMix to javafx.graphics;

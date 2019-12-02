@@ -18,7 +18,6 @@ public class VisualMix extends Application {
 
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("configuration/styles.css").toExternalForm());
-
 		stage.setTitle("VisualMix");
 		stage.setScene(scene);
 		stage.show();

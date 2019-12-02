@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visualMix.configuration.Controller">
+<AnchorPane fx:id="background" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visualMix.configuration.Controller">
    <children>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
          <children>
             <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Configuration" textAlignment="CENTER" VBox.vgrow="ALWAYS">
                <font>
@@ -43,22 +43,21 @@
             </GridPane>
          </children>
       </VBox>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
          <children>
             <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                <children>
                   <GridPane alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                     <columnConstraints>
-                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints maxHeight="170.33334350585938" minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
                       <RowConstraints maxHeight="197.0" minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
                       <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
                       <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
-                        <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
                         <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
                     </rowConstraints>
                      <children>
@@ -73,22 +72,18 @@
                         <Label text="EQ Low" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                         <ComboBox fx:id="eqLowAChannel" prefWidth="150.0" promptText="Channel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                         <ComboBox fx:id="eqLowACC" prefWidth="150.0" promptText="CC" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                        <Label text="Beat Phase" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-                        <ComboBox fx:id="beatPhaseAChannel" prefWidth="150.0" promptText="Channel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-                        <ComboBox fx:id="beatPhaseACC" prefWidth="150.0" promptText="CC" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-                        <Label text="Fader Level" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-                        <ComboBox fx:id="faderLevelAChannel" prefWidth="150.0" promptText="Channel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-                        <ComboBox fx:id="faderLevelACC" prefWidth="150.0" promptText="CC" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+                        <Label text="Fader Level" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="faderLevelAChannel" prefWidth="150.0" promptText="Channel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="faderLevelACC" prefWidth="150.0" promptText="CC" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
                   <GridPane alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="100.0" />
                      </columnConstraints>
                      <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
                         <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
                         <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
                         <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
@@ -107,12 +102,9 @@
                         <Label text="EQ Low" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                         <ComboBox fx:id="eqLowBChannel" prefWidth="150.0" promptText="Channel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                         <ComboBox fx:id="eqLowBCC" prefWidth="150.0" promptText="CC" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                        <Label text="Beat Phase" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-                        <ComboBox fx:id="beatPhaseBChannel" prefWidth="150.0" promptText="Channel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-                        <ComboBox fx:id="beatPhaseBCC" prefWidth="150.0" promptText="CC" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-                        <Label text="Fader Level" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-                        <ComboBox fx:id="faderLevelBChannel" prefWidth="150.0" promptText="Channel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-                        <ComboBox fx:id="faderLevelBCC" prefWidth="150.0" promptText="CC" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+                        <Label text="Fader Level" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="faderLevelBChannel" prefWidth="150.0" promptText="Channel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="faderLevelBCC" prefWidth="150.0" promptText="CC" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
                </children>
@@ -145,10 +137,15 @@
             </Button>
          </children>
       </HBox>
-      <HBox spacing="20.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+      <HBox spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
          <children>
             <Label text="CC:" />
             <Label fx:id="ccDebug" />
+         </children>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="10.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <children>
+            <Label fx:id="clockDebug" text="----" />
          </children>
       </HBox>
    </children>
