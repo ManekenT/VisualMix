@@ -1,4 +1,4 @@
-package visualMix.midiInterface;
+package main.midiInterface;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.sound.midi.MidiMessage;
 
+import main.visualizer.Visualizer;
 import themidibus.MidiBus;
 import themidibus.SimpleMidiListener;
 import themidibus.StandardMidiListener;
@@ -17,22 +18,13 @@ import themidibus.StandardMidiListener;
  * @author ManekenT
  *
  */
-public class MidiListener implements SimpleMidiListener, StandardMidiListener {
-
-	private static MidiListener INSTANCE;
+public class MidiManager implements SimpleMidiListener, StandardMidiListener {
 
 	private static int CLOCK_CC = 248;
 	private static int CLOCK_START = 250;
 
-	private MidiListener() {
+	public MidiManager() {
 		init();
-	}
-
-	public static MidiListener getInstance() {
-		if (INSTANCE == null) {
-			INSTANCE = new MidiListener();
-		}
-		return INSTANCE;
 	}
 
 	private MidiBus _midibus = new MidiBus();
@@ -73,7 +65,7 @@ public class MidiListener implements SimpleMidiListener, StandardMidiListener {
 
 	@Override
 	public void controllerChange(int channel, int number, int value) {
-		for (ControllerValues controllerValue : ControllerValues.values()) {
+		for (Controls controllerValue : Controls.values()) {
 			if (channel == controllerValue.getChannel() && number == controllerValue.getCC()) {
 				controllerValue.setValue(value);
 			}
@@ -114,6 +106,10 @@ public class MidiListener implements SimpleMidiListener, StandardMidiListener {
 			clearMidiInouts();
 			_midibus.addInput(_midiDevice);
 		}
+	}
+
+	public void removeClockListener(Visualizer _visualizer) {
+		_clockListener.remove(_visualizer);
 	}
 
 }

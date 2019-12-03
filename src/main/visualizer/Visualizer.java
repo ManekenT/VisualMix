@@ -1,7 +1,7 @@
-package visualMix.visualizer;
+package main.visualizer;
 
+import main.midiInterface.MidiClockListener;
 import processing.core.PApplet;
-import visualMix.midiInterface.MidiClockListener;
 
 public abstract class Visualizer implements MidiClockListener {
 
@@ -10,13 +10,9 @@ public abstract class Visualizer implements MidiClockListener {
 
 	public abstract void draw(PApplet processing);
 
-	public void settings(PApplet processing) {
-		processing.size(1000, 700);
-	}
+	public abstract void settings(PApplet processing);
 
-	public void setup(PApplet processing) {
-		processing.fill(120, 50, 240);
-	}
+	public abstract void setup(PApplet processing);
 
 	public abstract String getName();
 

@@ -1,7 +1,7 @@
-package visualMix.visualizer;
+package main.visualizer;
 
+import main.midiInterface.Controls;
 import processing.core.PApplet;
-import visualMix.midiInterface.ControllerValues;
 
 public class TestVisualizer extends Visualizer {
 
@@ -11,9 +11,13 @@ public class TestVisualizer extends Visualizer {
 
 	@Override
 	public void draw(PApplet processing) {
-		processing.clear();
+		processing.background(0);
+
+		processing.fill(255, 125, 30);
 		processing.rect(processing.width / 2.0F, processing.height / 2.0F,
-				((float) (100 * ControllerValues.getEQHigh())), 200F);
+				((float) (100
+						* Controls.getNormalizedKnobs(Controls.EQ_HIGH_A, Controls.EQ_HIGH_B))),
+				200F);
 		processing.ellipse(processing.width * 0.5F, processing.height / 4F, _clockCircleSizeQuarter,
 				_clockCircleSizeQuarter);
 		_clockCircleSizeQuarter = _clockCircleSizeQuarter * 0.9F;
@@ -23,6 +27,7 @@ public class TestVisualizer extends Visualizer {
 		processing.ellipse(processing.width * 0.75F, processing.height / 4F, _clockCircleSizeEighth,
 				_clockCircleSizeEighth);
 		_clockCircleSizeEighth = _clockCircleSizeEighth * 0.9F;
+
 	}
 
 	@Override
@@ -43,5 +48,16 @@ public class TestVisualizer extends Visualizer {
 	@Override
 	public void eighthNote() {
 		_clockCircleSizeEighth = 400;
+	}
+
+	@Override
+	public void settings(PApplet processing) {
+		processing.fullScreen(2);
+	}
+
+	@Override
+	public void setup(PApplet processing) {
+		// TODO Auto-generated method stub
+
 	}
 }

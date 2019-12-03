@@ -1,11 +1,11 @@
-package visualMix.midiInterface;
+package main.midiInterface;
 
-public enum ControllerValues {
+public enum Controls {
 	EQ_HIGH_A, EQ_MID_A, EQ_LOW_A, FADER_LEVEL_A, EQ_HIGH_B, EQ_MID_B, EQ_LOW_B, FADER_LEVEL_B, CROSSFADER;
 
-	private int _value;
 	private int _channel;
 	private int _cc;
+	private int _value;
 
 	public int getValue() {
 		return _value;
@@ -51,14 +51,22 @@ public enum ControllerValues {
 		return _value / 127;
 	}
 
-	public static double getEQHigh() {
+	/**
+	 * Normalized the EQ values of two of the same knob from different decks (i.e.
+	 * EQ High A and EQ High B) depending on the fader values of the respective
+	 * decks.
+	 * 
+	 * @return a float from -1 to 1, with 0 being a neutral knob position (between
+	 *         both decks)
+	 */
+	public static double getNormalizedKnobs(Controls knobA, Controls knobB) {
 		float faderSum = FADER_LEVEL_A.getValue() + FADER_LEVEL_B.getValue();
 		if (faderSum == 0) {
 			return 0;
 		}
 		double portionFaderA = FADER_LEVEL_A.getValue() / faderSum;
 		double portionFaderB = FADER_LEVEL_B.getValue() / faderSum;
-		return portionFaderA * EQ_HIGH_A.normalizeKnob() + portionFaderB * EQ_HIGH_B.normalizeKnob();
+		return portionFaderA * knobA.normalizeKnob() + portionFaderB * knobB.normalizeKnob();
 	}
 
 }

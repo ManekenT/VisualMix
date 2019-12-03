@@ -1,4 +1,4 @@
-package visualMix.midiInterface;
+package main.midiInterface;
 
 public interface MidiClockListener {
 	public void onClockTick();

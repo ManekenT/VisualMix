@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<controller_mapping>
+    <control cc="3" channel="0" name="EQ_HIGH_A"/>
+    <control cc="5" channel="0" name="EQ_MID_A"/>
+    <control cc="7" channel="0" name="EQ_LOW_A"/>
+    <control cc="1" channel="0" name="FADER_LEVEL_A"/>
+    <control cc="4" channel="0" name="EQ_HIGH_B"/>
+    <control cc="6" channel="0" name="EQ_MID_B"/>
+    <control cc="8" channel="0" name="EQ_LOW_B"/>
+    <control cc="2" channel="0" name="FADER_LEVEL_B"/>
+    <control cc="0" channel="0" name="CROSSFADER"/>
+</controller_mapping>
