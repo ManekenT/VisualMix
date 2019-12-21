@@ -1,5 +1,7 @@
 package main.configuration;
 
+import java.util.List;
+
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -84,7 +86,7 @@ public class Controller {
 
 	private VisualizerApplet _applet;
 	private MidiManager _midiManager;
-	private Visualizer _defaultVisualizer;
+	private List<Visualizer> _visualizer;
 
 	public void initialize() {
 		visualizerComboBox.setItems(getAvailableVisualizer());
@@ -143,13 +145,13 @@ public class Controller {
 				.setOnAction(e -> Controls.FADER_LEVEL_B.setCC(faderLevelBCC.getSelectionModel().getSelectedItem()));
 	}
 
-	public void injectModels(MidiManager manager, VisualizerApplet applet, Visualizer defaultVisualizer) {
+	public void injectModels(MidiManager manager, VisualizerApplet applet, List<Visualizer> visualizer) {
 		_applet = applet;
 		_midiManager = manager;
-		_defaultVisualizer = defaultVisualizer;
+		_visualizer = visualizer;
 		initMidiDebugListener();
-		visualizerComboBox.getItems().add(0, _defaultVisualizer);
-		visualizerComboBox.getSelectionModel().select(_defaultVisualizer);
+		visualizerComboBox.getItems().addAll(_visualizer);
+		visualizerComboBox.getSelectionModel().select(0);
 	}
 
 	private void initializeChannelComboBox(ComboBox<Integer> comboBox) {

@@ -37,8 +37,8 @@ public enum Controls {
 	 * 
 	 * @return a float from -1 to 1, with 0 being a neutral knob position
 	 */
-	public double normalizeKnob() {
-		return (_value - 63.5) / 63.5;
+	public float normalizeKnob() {
+		return (_value - 63.5F) / 63.5F;
 	}
 
 	/**
@@ -47,8 +47,8 @@ public enum Controls {
 	 * 
 	 * @return a float from 0 to 1 representing the fader position
 	 */
-	public double normalizeFader() {
-		return _value / 127;
+	public float normalizeFader() {
+		return _value / 127.0F;
 	}
 
 	/**
@@ -59,14 +59,14 @@ public enum Controls {
 	 * @return a float from -1 to 1, with 0 being a neutral knob position (between
 	 *         both decks)
 	 */
-	public static double getNormalizedKnobs(Controls knobA, Controls knobB) {
+	public static float getNormalizedKnobs(Controls knobA, Controls knobB) {
 		float faderSum = FADER_LEVEL_A.getValue() + FADER_LEVEL_B.getValue();
 		if (faderSum == 0) {
 			return 0;
 		}
 		double portionFaderA = FADER_LEVEL_A.getValue() / faderSum;
 		double portionFaderB = FADER_LEVEL_B.getValue() / faderSum;
-		return portionFaderA * knobA.normalizeKnob() + portionFaderB * knobB.normalizeKnob();
+		return (float) (portionFaderA * knobA.normalizeKnob() + portionFaderB * knobB.normalizeKnob());
 	}
 
 }

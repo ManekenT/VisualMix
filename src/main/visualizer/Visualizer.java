@@ -8,13 +8,17 @@ public abstract class Visualizer implements MidiClockListener {
 	private int _clockTicks;
 	private static int MIDI_CLOCK_DEVISION = 24;
 
-	public abstract void draw(PApplet processing);
+	protected abstract void draw();
 
-	public abstract void settings(PApplet processing);
+	protected abstract void setup();
 
-	public abstract void setup(PApplet processing);
+	protected abstract String getName();
 
-	public abstract String getName();
+	protected final PApplet _applet;
+
+	public Visualizer(PApplet applet) {
+		_applet = applet;
+	}
 
 	@Override
 	public String toString() {
@@ -35,15 +39,28 @@ public abstract class Visualizer implements MidiClockListener {
 		if (_clockTicks % (MIDI_CLOCK_DEVISION * 2) == 0) {
 			halfNote();
 		}
+		if (_clockTicks % (MIDI_CLOCK_DEVISION * 4) == 0) {
+			wholeNote();
+		}
 		if (_clockTicks % (MIDI_CLOCK_DEVISION / 2) == 0) {
 			eighthNote();
 		}
 	}
 
-	public abstract void quarterNote();
+	protected void wholeNote() {
+		// empty
+	}
 
-	public abstract void halfNote();
+	protected void quarterNote() {
+		// empty
+	}
 
-	public abstract void eighthNote();
+	protected void halfNote() {
+		// empty
+	}
+
+	protected void eighthNote() {
+		// empty
+	}
 
 }
